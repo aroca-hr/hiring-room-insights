@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tablero Hiring Room — Mayo 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+body{background:#151C2C;font-family:'Montserrat',sans-serif;color:#E8EDF5;padding:32px;min-height:100vh;}
+.b{background:#1E2535;border-radius:20px;padding:28px;max-width:980px;margin:0 auto;box-shadow:0 4px 40px rgba(0,0,0,0.4);}
+.hdr{display:flex;align-items:center;justify-content:space-between;margin-bottom:22px;padding-bottom:16px;border-bottom:1px solid rgba(78,203,165,0.3);flex-wrap:wrap;gap:8px;}
+.logo{display:flex;align-items:center;gap:9px;}
+.dot{width:9px;height:9px;border-radius:50%;background:#4ECBA5;}
+.logo-t{font-size:18px;font-weight:700;color:#fff;}
+.badge{background:rgba(78,203,165,0.15);color:#4ECBA5;font-size:10px;font-weight:700;padding:3px 10px;border-radius:20px;border:1px solid rgba(78,203,165,0.3);}
+.badge-warn{background:rgba(239,160,39,0.12);color:#EFA027;border-color:rgba(239,160,39,0.3);}
+.meta{font-size:11px;color:#8A96B0;}
+.st{font-size:10px;font-weight:700;letter-spacing:1.3px;text-transform:uppercase;color:#4ECBA5;margin-bottom:12px;}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px;}
+.g4{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:14px;margin-bottom:14px;}
+@media(max-width:650px){.g2,.g4{grid-template-columns:1fr 1fr;}}
+@media(max-width:420px){.g2,.g4{grid-template-columns:1fr;}}
+.card{background:#263044;border-radius:14px;padding:16px;border:1px solid rgba(255,255,255,0.06);}
+.mn{font-size:34px;font-weight:700;color:#4ECBA5;line-height:1;}
+.mn-warn{color:#EFA027;}.mn-blue{color:#7EB3F5;}
+.ml{font-size:11px;color:#8A96B0;margin-top:4px;font-weight:500;}
+.ii{display:flex;align-items:flex-start;gap:9px;margin-bottom:10px;font-size:12px;line-height:1.55;color:#C5CDD8;}
+.dg{width:6px;height:6px;border-radius:50%;background:#4ECBA5;margin-top:5px;flex-shrink:0;}
+.dw{width:6px;height:6px;border-radius:50%;background:#EFA027;margin-top:5px;flex-shrink:0;}
+.db{width:6px;height:6px;border-radius:50%;background:#7EB3F5;margin-top:5px;flex-shrink:0;}
+.bw{margin-bottom:10px;}
+.bl{display:flex;justify-content:space-between;font-size:11px;color:#8A96B0;margin-bottom:4px;}
+.bt{background:rgba(255,255,255,0.07);border-radius:4px;height:7px;overflow:hidden;}
+.bf{height:100%;border-radius:4px;background:#4ECBA5;}
+.bfw{background:#EFA027;}.bfb{background:#7EB3F5;}
+.tag{display:inline-block;background:rgba(78,203,165,0.12);color:#4ECBA5;font-size:10px;font-weight:600;padding:3px 9px;border-radius:12px;margin:2px 2px 2px 0;border:1px solid rgba(78,203,165,0.2);}
+.tw{background:rgba(239,160,39,0.12);color:#EFA027;border-color:rgba(239,160,39,0.2);}
+.ti{background:rgba(100,149,237,0.12);color:#7EB3F5;border-color:rgba(100,149,237,0.2);}
+.sr{display:flex;align-items:center;justify-content:space-between;padding:10px 0;border-bottom:1px solid rgba(255,255,255,0.05);font-size:12px;}
+.sr:last-child{border-bottom:none;}
+.sn{font-weight:600;color:#E8EDF5;}.ss{color:#8A96B0;font-size:10px;margin-top:2px;}
+.pok{background:rgba(78,203,165,0.15);color:#4ECBA5;padding:2px 8px;border-radius:10px;font-size:10px;font-weight:700;}
+.div{height:1px;background:rgba(255,255,255,0.06);margin:12px 0;}
+.fr{margin-bottom:14px;}
+.chip{display:inline-flex;align-items:center;gap:5px;background:#1E2535;border:1px solid rgba(239,160,39,0.25);border-radius:8px;padding:4px 10px;font-size:11px;color:#C5CDD8;margin:3px 3px 3px 0;}
+.chip-dot{width:5px;height:5px;border-radius:50%;background:#EFA027;flex-shrink:0;}
+.footer{text-align:center;margin-top:12px;font-size:10px;color:#4A5568;letter-spacing:0.5px;}
+</style>
+</head>
+<body>
+<div class="b">
+  <div class="hdr">
+    <div class="logo"><div class="dot"></div><span class="logo-t">Hiring Room — Tablero de Insights</span></div>
+    <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;">
+      <span class="meta">Actualizado · Mayo 2026</span>
+      <span class="badge">2 transcripciones</span>
+      <span class="badge-warn">2 clientes</span>
+    </div>
+  </div>
+
+  <div class="g4">
+    <div class="card"><div class="mn">2</div><div class="ml">Sesiones analizadas</div></div>
+    <div class="card"><div class="mn">35'</div><div class="ml">Duración promedio</div></div>
+    <div class="card"><div class="mn mn-warn">6</div><div class="ml">Fricciones detectadas</div></div>
+    <div class="card"><div class="mn mn-blue">8</div><div class="ml">Funcionalidades mencionadas</div></div>
+  </div>
+
+  <div class="g2">
+    <div class="card">
+      <div class="st">Highlights destacados</div>
+      <div class="ii"><div class="dg"></div><span><strong style="color:#E8EDF5">Grupo Peñaflor:</strong> Pipeline centralizado eliminó el Excel compartido. Ahorro ~2hs por vacante con integración Bumeran</span></div>
+      <div class="ii"><div class="dg"></div><span><strong style="color:#E8EDF5">Grupo Peñaflor:</strong> Selección colaborativa con líderes acortó el tiempo de decisión final en casi una semana por búsqueda</span></div>
+      <div class="ii"><div class="dg"></div><span><strong style="color:#E8EDF5">Grupo Peñaflor:</strong> Hiring Bot filtró 200 postulaciones en búsquedas operativas con buena clasificación</span></div>
+      <div class="ii"><div class="dg"></div><span><strong style="color:#E8EDF5">Grupo Peñaflor:</strong> Career Site generó postulaciones orgánicas — funcionalidad antes inexistente para ellos</span></div>
+      <div class="ii"><div class="dg"></div><span><strong style="color:#E8EDF5">qualipharmlab:</strong> Usuaria nueva con alta disposición; interés inmediato en Google Calendar y candidatos sugeridos por IA</span></div>
+    </div>
+
+    <div class="card">
+      <div class="st">Errores / Fricciones detectadas</div>
+      <div class="ii"><div class="dw"></div><span><strong style="color:#EFA027">Bot · Grupo Peñaflor:</strong> Candidatos confundidos — no queda claro que interactúan con un bot. Requiere mensaje inicial más explícito</span></div>
+      <div class="ii"><div class="dw"></div><span><strong style="color:#EFA027">Bot · Grupo Peñaflor:</strong> Latencia de hasta 10 min en respuestas del Hiring Bot — causa abandono de candidatos</span></div>
+      <div class="ii"><div class="dw"></div><span><strong style="color:#EFA027">IA · Grupo Peñaflor:</strong> Resúmenes de videoentrevistas demasiado genéricos — terminan mirando el video igual</span></div>
+      <div class="ii"><div class="dw"></div><span><strong style="color:#EFA027">Soporte · Grupo Peñaflor:</strong> 3 días para resolver error en publicación LinkedIn — pérdida de días de difusión</span></div>
+      <div class="ii"><div class="dw"></div><span><strong style="color:#EFA027">Pipeline · qualipharmlab:</strong> Solo 2 etapas por default vs. 5-6 del proceso real. Candidatos gestionados en Excel/Calendario</span></div>
+      <div class="ii"><div class="dw"></div><span><strong style="color:#EFA027">Onboarding · ambos:</strong> Configuración inicial de pipelines frustrante. Falta tutorial guiado o plantillas por industria</span></div>
+    </div>
+  </div>
+
+  <div class="fr">
+    <div class="card">
+      <div class="st">Feedback por funcionalidad — ambos clientes</div>
+      <div class="g2" style="margin-bottom:0;">
+        <div>
+          <div class="bw"><div class="bl"><span>Pipeline centralizado</span><span style="color:#4ECBA5">Impacto alto</span></div><div class="bt"><div class="bf" style="width:95%"></div></div></div>
+          <div class="bw"><div class="bl"><span>Integración portales (Bumeran)</span><span style="color:#4ECBA5">Muy positivo</span></div><div class="bt"><div class="bf" style="width:90%"></div></div></div>
+          <div class="bw"><div class="bl"><span>Selección colaborativa líderes</span><span style="color:#4ECBA5">Alto valor</span></div><div class="bt"><div class="bf" style="width:85%"></div></div></div>
+          <div class="bw"><div class="bl"><span>Google Calendar / Videoentrevistas</span><span style="color:#7EB3F5">Interés alto</span></div><div class="bt"><div class="bf bfb" style="width:78%"></div></div></div>
+        </div>
+        <div>
+          <div class="bw"><div class="bl"><span>Hiring Bot (latencia + claridad)</span><span style="color:#EFA027">Requiere mejora</span></div><div class="bt"><div class="bf bfw" style="width:55%"></div></div></div>
+          <div class="bw"><div class="bl"><span>Resúmenes IA videoentrevistas</span><span style="color:#EFA027">Requiere mejora</span></div><div class="bt"><div class="bf bfw" style="width:45%"></div></div></div>
+          <div class="bw"><div class="bl"><span>Reportes / KPIs (métricas faltantes)</span><span style="color:#EFA027">Gap detectado</span></div><div class="bt"><div class="bf bfw" style="width:40%"></div></div></div>
+          <div class="bw"><div class="bl"><span>Boarding Room</span><span style="color:#7EB3F5">Pendiente activar</span></div><div class="bt"><div class="bf bfb" style="width:20%"></div></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="g2">
+    <div class="card">
+      <div class="st">Temas más mencionados (cross-sesiones)</div>
+      <span class="tag">Pipeline / Etapas</span>
+      <span class="tag">Google Calendar</span>
+      <span class="tag">Candidatos sugeridos IA</span>
+      <span class="tag">Integración Bumeran</span>
+      <span class="tag">Selección colaborativa</span>
+      <span class="tag">Career Site</span>
+      <span class="tag tw">Hiring Bot latencia</span>
+      <span class="tag tw">Bot no transparente</span>
+      <span class="tag tw">Resúmenes IA genéricos</span>
+      <span class="tag tw">Soporte lento</span>
+      <span class="tag tw">Gestión en Excel</span>
+      <span class="tag tw">Onboarding pipeline</span>
+      <span class="tag ti">Boarding Room</span>
+      <span class="tag ti">Psicométricas Kokoro</span>
+      <span class="tag ti">Reportes / KPIs</span>
+      <span class="tag ti">LinkedIn integración</span>
+      <div class="div"></div>
+      <div style="font-size:10px;color:#8A96B0;font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:8px;">Feedback de producto a registrar</div>
+      <div class="chip"><div class="chip-dot"></div>Mejorar resúmenes IA en videoentrevistas</div>
+      <div class="chip"><div class="chip-dot"></div>Métrica de rechazo de oferta en reportes</div>
+      <div class="chip"><div class="chip-dot"></div>Personalización de pruebas psicométricas por rol</div>
+      <div class="chip"><div class="chip-dot"></div>Tutorial/plantilla onboarding pipeline por industria</div>
+      <div class="chip"><div class="chip-dot"></div>Mensaje inicial Bot más transparente</div>
+    </div>
+
+    <div class="card">
+      <div class="st">Sesiones analizadas</div>
+      <div class="sr">
+        <div>
+          <div class="sn">Grupo Peñaflor</div>
+          <div class="ss">Marcela Duarte + Tomás Ferreyra · 5 May 2026 · 52 min · Revisión mensual</div>
+        </div>
+        <span class="pok">Completa</span>
+      </div>
+      <div class="sr">
+        <div>
+          <div class="sn">qualipharmlab</div>
+          <div class="ss">Martita Aracely · 23 Abr 2026 · 17 min · Onboarding usuario nuevo</div>
+        </div>
+        <span class="pok">Completa</span>
+      </div>
+      <div class="div"></div>
+      <div style="font-size:10px;color:#8A96B0;font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:8px;">Próximos pasos urgentes</div>
+      <div class="ii" style="margin-bottom:7px;"><div class="dw"></div><span style="font-size:12px;">Revisar latencia Hiring Bot con equipo técnico (Grupo Peñaflor)</span></div>
+      <div class="ii" style="margin-bottom:7px;"><div class="dw"></div><span style="font-size:12px;">Escalar caso soporte LinkedIn demorado 3 días</span></div>
+      <div class="ii" style="margin-bottom:7px;"><div class="dg"></div><span style="font-size:12px;">Enviar material Boarding Room a Marcela Duarte (Valentina)</span></div>
+      <div class="ii" style="margin-bottom:7px;"><div class="dg"></div><span style="font-size:12px;">Configurar pipeline real en qualipharmlab (5-6 etapas)</span></div>
+      <div class="ii" style="margin-bottom:0;"><div class="dg"></div><span style="font-size:12px;">Activar integración LinkedIn en qualipharmlab</span></div>
+    </div>
+  </div>
+
+  <div class="footer">Generado automáticamente desde Google Drive · Hiring Room Analytics · Mayo 2026</div>
+</div>
+</body>
+</html>
