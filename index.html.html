@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hiring Room — Tablero de Insights</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --dark:#1E2535;--card:#2A3348;--green:#4ECBA5;--green2:#3AB38E;
+  --green-dim:rgba(78,203,165,0.12);--green-border:rgba(78,203,165,0.3);
+  --teal:#2DD4BF;--white:#FFFFFF;--gray:#A0ABBF;--gray2:#6B7A99;
+  --red:#FF6B6B;--amber:#FFB547;
+  --border:rgba(255,255,255,0.07);--border2:rgba(255,255,255,0.12);
+}
+body{font-family:'Inter',sans-serif;background:var(--dark);color:var(--white);min-height:100vh;overflow-x:hidden}
+body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(78,203,165,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(78,203,165,0.03) 1px,transparent 1px);background-size:40px 40px;pointer-events:none;z-index:0}
+.wrap{max-width:980px;margin:0 auto;padding:2rem 1.5rem 3rem;position:relative;z-index:1}
+
+.deco{display:flex;gap:3px;margin-bottom:2rem}
+.deco span{display:block;height:4px;width:14px;border-radius:2px;background:var(--green)}
+.deco span:nth-child(n+5){opacity:.5}.deco span:nth-child(n+10){opacity:.2}
+
+.header{display:flex;align-items:center;justify-content:space-between;margin-bottom:2rem;padding-bottom:1.5rem;border-bottom:1px solid var(--border2);gap:1rem;flex-wrap:wrap}
+.logo{display:flex;align-items:center;gap:14px}
+.logo-icon{width:40px;height:46px;border:2.5px solid var(--green);border-radius:6px;position:relative;flex-shrink:0}
+.logo-icon::after{content:'';width:13px;height:26px;background:var(--green);border-radius:3px 0 0 3px;position:absolute;left:5px;top:50%;transform:translateY(-50%)}
+.logo-name{font-family:'Montserrat',sans-serif;font-size:20px;font-weight:800}
+.logo-name span{font-weight:400}
+.logo-sub{font-size:11px;color:var(--gray);margin-top:3px;letter-spacing:.06em}
+.pill{font-size:11px;font-weight:700;padding:5px 14px;border-radius:100px;letter-spacing:.05em;font-family:'Montserrat',sans-serif;border:1px solid var(--green-border);color:var(--green);background:var(--green-dim)}
+
+.chip{display:inline-flex;align-items:center;gap:6px;background:var(--green-dim);border:1px solid var(--green-border);color:var(--green);font-family:'Montserrat',sans-serif;font-size:10px;font-weight:800;letter-spacing:.1em;padding:4px 12px;border-radius:100px;margin-bottom:12px}
+
+/* Docs */
+.docs-grid{display:flex;flex-direction:column;gap:6px;margin-bottom:1.5rem}
+.doc-card{display:flex;align-items:center;gap:12px;background:var(--card);border:1px solid var(--border2);border-radius:10px;padding:12px 16px}
+.doc-icon{width:34px;height:34px;border-radius:8px;background:var(--green-dim);border:1px solid var(--green-border);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.doc-info{flex:1;min-width:0}
+.doc-title{font-size:13px;font-weight:500;color:var(--white);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.doc-meta{font-size:11px;color:var(--gray2);margin-top:2px}
+.doc-badge{font-size:10px;font-weight:700;padding:3px 10px;border-radius:100px;background:var(--green-dim);color:var(--green);border:1px solid var(--green-border);font-family:'Montserrat',sans-serif;white-space:nowrap;flex-shrink:0}
+
+/* Metrics */
+.metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:14px}
+.metric{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:1.25rem;position:relative;overflow:hidden}
+.metric::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--green),transparent)}
+.metric-label{font-size:10px;color:var(--gray);margin-bottom:10px;letter-spacing:.06em;font-family:'Montserrat',sans-serif;font-weight:600}
+.mv{font-family:'Montserrat',sans-serif;font-size:34px;font-weight:800;color:var(--green);line-height:1;margin-bottom:4px}
+.mv.red{color:var(--red)}.mv.amber{color:var(--amber)}
+.metric-sub{font-size:11px;color:var(--gray2)}
+
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px}
+.card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:1.4rem;margin-bottom:10px}
+.card:last-child{margin-bottom:0}
+.card-head{display:flex;align-items:center;gap:8px;margin-bottom:1.2rem;font-family:'Montserrat',sans-serif;font-size:12px;font-weight:800;letter-spacing:.04em}
+.cdot{width:7px;height:7px;border-radius:50%;flex-shrink:0}
+
+.irow{display:flex;gap:12px;align-items:flex-start;padding:11px 0;border-bottom:1px solid var(--border)}
+.irow:first-child{padding-top:0}.irow:last-child{border-bottom:none;padding-bottom:0}
+.ibullet{width:28px;height:28px;border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.ib-g{background:var(--green-dim);border:1px solid var(--green-border)}
+.ib-r{background:rgba(255,107,107,0.12);border:1px solid rgba(255,107,107,0.3)}
+.itext{font-size:13px;color:rgba(255,255,255,.9);line-height:1.55;flex:1}
+.imeta{font-size:11px;color:var(--gray2);margin-top:3px}
+.icount{font-family:'Montserrat',sans-serif;font-size:11px;font-weight:800;padding:2px 9px;border-radius:100px;background:rgba(255,107,107,0.15);color:var(--red);white-space:nowrap;flex-shrink:0;margin-top:4px}
+
+.badge{display:inline-block;font-size:10px;font-weight:700;padding:3px 10px;border-radius:100px;font-family:'Montserrat',sans-serif;letter-spacing:.03em}
+.bg{background:var(--green-dim);color:var(--green);border:1px solid var(--green-border)}
+.br{background:rgba(255,107,107,0.12);color:var(--red);border:1px solid rgba(255,107,107,0.3)}
+.ba{background:rgba(255,181,71,0.12);color:var(--amber);border:1px solid rgba(255,181,71,0.3)}
+.bt{background:rgba(45,212,191,0.12);color:var(--teal);border:1px solid rgba(45,212,191,0.3)}
+
+.frow{padding:13px 0;border-bottom:1px solid var(--border)}
+.frow:first-child{padding-top:0}.frow:last-child{border-bottom:none;padding-bottom:0}
+.fbadges{display:flex;gap:6px;margin-bottom:7px;flex-wrap:wrap}
+.ftext{font-size:13px;color:rgba(255,255,255,.85);line-height:1.55}
+
+.brow{display:flex;align-items:center;gap:12px;margin-bottom:13px}
+.brow:last-child{margin-bottom:0}
+.blabel{font-size:13px;color:var(--white);width:200px;flex-shrink:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.btrack{flex:1;height:7px;background:rgba(255,255,255,0.06);border-radius:4px;overflow:hidden}
+.bfill{height:100%;border-radius:4px}
+.bcount{font-family:'Montserrat',sans-serif;font-size:12px;font-weight:700;color:var(--gray2);width:22px;text-align:right;flex-shrink:0}
+
+.update-note{display:flex;align-items:center;gap:8px;margin-bottom:1.5rem;font-size:12px;color:var(--gray2);background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:8px;padding:8px 14px}
+.update-note strong{color:var(--green)}
+
+.footer{margin-top:2rem;padding-top:1rem;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center}
+.footer-brand{font-family:'Montserrat',sans-serif;font-size:12px;font-weight:700;color:var(--gray2)}
+.footer-brand em{color:var(--green);font-style:normal}
+.footer-time{font-size:11px;color:var(--gray2)}
+
+@media(max-width:640px){.metrics{grid-template-columns:repeat(2,1fr)}.grid2{grid-template-columns:1fr}.header{flex-direction:column;align-items:flex-start}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="deco">
+    <span></span><span></span><span></span><span></span><span></span>
+    <span></span><span></span><span></span><span></span><span></span>
+    <span></span><span></span><span></span><span></span><span></span>
+    <span></span><span></span><span></span><span></span><span></span>
+  </div>
+
+  <div class="header">
+    <div class="logo">
+      <div class="logo-icon"></div>
+      <div>
+        <div class="logo-name">Hiring <span>Room</span></div>
+        <div class="logo-sub">TABLERO DE INSIGHTS · REUNIONES DE CLIENTES</div>
+      </div>
+    </div>
+    <span class="pill">ACTUALIZADO</span>
+  </div>
+
+  <div class="update-note">
+    <svg width="14" height="14" fill="none" stroke="#4ECBA5" stroke-width="1.5" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+    Última actualización: <strong>6 de mayo de 2026</strong> &nbsp;·&nbsp; Carpeta: <strong>Drive / Transcripciones Clientes</strong>
+  </div>
+
+  <!-- Documentos -->
+  <div class="chip">
+    <svg width="8" height="8" viewBox="0 0 8 8" fill="currentColor"><circle cx="4" cy="4" r="4"/></svg>
+    DOCUMENTOS ANALIZADOS
+  </div>
+  <div class="docs-grid">
+    <div class="doc-card">
+      <div class="doc-icon">
+        <svg width="16" height="16" fill="none" stroke="#4ECBA5" stroke-width="1.5" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+      </div>
+      <div class="doc-info">
+        <div class="doc-title">Transcripción - Reunión cliente Grupo Peñaflor - 05 mayo 2026</div>
+        <div class="doc-meta">Revisión mensual · 52 min · Marcela Duarte + Tomás Ferreyra · modificado 6 may 2026</div>
+      </div>
+      <div class="doc-badge">LEÍDO</div>
+    </div>
+  </div>
+
+  <!-- Métricas -->
+  <div class="chip" style="margin-top:.5rem">
+    <svg width="8" height="8" viewBox="0 0 8 8" fill="currentColor"><circle cx="4" cy="4" r="4"/></svg>
+    IMPACTO
+  </div>
+  <div class="metrics">
+    <div class="metric">
+      <div class="metric-label">REUNIONES ANALIZADAS</div>
+      <div class="mv">1</div>
+      <div class="metric-sub">transcripción</div>
+    </div>
+    <div class="metric">
+      <div class="metric-label">HIGHLIGHTS</div>
+      <div class="mv">4</div>
+      <div class="metric-sub">puntos positivos</div>
+    </div>
+    <div class="metric">
+      <div class="metric-label">ERRORES DETECTADOS</div>
+      <div class="mv red">4</div>
+      <div class="metric-sub">recurrentes</div>
+    </div>
+    <div class="metric">
+      <div class="metric-label">FEEDBACKS</div>
+      <div class="mv amber">5</div>
+      <div class="metric-sub">sobre funcionalidades</div>
+    </div>
+  </div>
+
+  <!-- Highlights + Errores -->
+  <div class="grid2">
+    <div class="card">
+      <div class="card-head"><span class="cdot" style="background:var(--green)"></span>HIGHLIGHTS DE HIRING ROOM</div>
+
+      <div class="irow">
+        <div class="ibullet ib-g"><svg width="12" height="12" fill="none" stroke="#4ECBA5" stroke-width="2" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+        <div><div class="itext">El pipeline centralizado eliminó la fragmentación en Excel: todo el equipo trabaja sobre la misma información en tiempo real</div><div class="imeta">Marcela Duarte · Grupo Peñaflor</div></div>
+      </div>
+
+      <div class="irow">
+        <div class="ibullet ib-g"><svg width="12" height="12" fill="none" stroke="#4ECBA5" stroke-width="2" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+        <div><div class="itext">La integración con Bumeran funcionó desde el día 1, ahorrando ~2 horas por vacante que antes cargaban manualmente en 3 portales</div><div class="imeta">Tomás Ferreyra · Grupo Peñaflor</div></div>
+      </div>
+
+      <div class="irow">
+        <div class="ibullet ib-g"><svg width="12" height="12" fill="none" stroke="#4ECBA5" stroke-width="2" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+        <div><div class="itext">La selección colaborativa con líderes acortó el tiempo de decisión final en casi una semana por búsqueda</div><div class="imeta">Marcela Duarte · Grupo Peñaflor</div></div>
+      </div>
+
+      <div class="irow">
+        <div class="ibullet ib-g"><svg width="12" height="12" fill="none" stroke="#4ECBA5" stroke-width="2" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+        <div><div class="itext">El Career Site generó postulaciones orgánicas: candidatos mencionaron que postularon por la profesionalidad de la página de empleos</div><div class="imeta">Tomás Ferreyra · Grupo Peñaflor</div></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-head"><span class="cdot" style="background:var(--red)"></span>ERRORES RECURRENTES</div>
+
+      <div class="irow">
+        <div class="ibullet ib-r"><svg width="12" height="12" fill="none" stroke="#FF6B6B" stroke-width="2" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></div>
+        <div class="itext" style="flex:1">El Hiring Bot tardaba hasta 10 minutos en responder, generando fricción con candidatos que esperaban respuesta inmediata</div>
+        <span class="icount">2x</span>
+      </div>
+
+      <div class="irow">
+        <div class="ibullet ib-r"><svg width="12" height="12" fill="none" stroke="#FF6B6B" stroke-width="2" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></div>
+        <div class="itext" style="flex:1">Los resúmenes de IA de videoentrevistas son muy genéricos ("buena predisposición") y no reemplazan ver el video completo</div>
+        <span class="icount">2x</span>
+      </div>
+
+      <div class="irow">
+        <div class="ibullet ib-r"><svg width="12" height="12" fill="none" stroke="#FF6B6B" stroke-width="2" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></div>
+        <div class="itext" style="flex:1">Soporte tardó 3 días en resolver un error de publicación en LinkedIn, causando pérdida de días de difusión</div>
+        <span class="icount">1x</span>
+      </div>
+
+      <div class="irow">
+        <div class="ibullet ib-r"><svg width="12" height="12" fill="none" stroke="#FF6B6B" stroke-width="2" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></div>
+        <div class="itext" style="flex:1">Configurar pipelines personalizados la primera vez fue frustrante: falta un tutorial guiado o plantillas predefinidas por industria</div>
+        <span class="icount">1x</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Feedback funcionalidades -->
+  <div class="card">
+    <div class="card-head"><span class="cdot" style="background:var(--amber)"></span>FEEDBACK SOBRE FUNCIONALIDADES</div>
+
+    <div class="frow">
+      <div class="fbadges"><span class="badge bt">Hiring Bot</span><span class="badge br">negativo</span></div>
+      <div class="ftext">El mensaje inicial del Bot no deja claro que es un proceso automatizado. Candidatos escribían por WhatsApp preguntando si hablaban con una persona o un bot.</div>
+    </div>
+
+    <div class="frow">
+      <div class="fbadges"><span class="badge bt">Videoentrevistas con IA</span><span class="badge ba">neutro</span></div>
+      <div class="ftext">Muy útil para primer filtro sin coordinar horarios, pero el resumen de IA necesita mostrar experiencias concretas mencionadas por el candidato, no solo impresiones generales.</div>
+    </div>
+
+    <div class="frow">
+      <div class="fbadges"><span class="badge bt">Evaluaciones Kokoro</span><span class="badge bg">positivo</span></div>
+      <div class="ftext">Informes completos y fáciles de leer, se comparten directo con el líder antes de la entrevista final. Solicitan poder preconfigurar qué pruebas aplicar según tipo de posición.</div>
+    </div>
+
+    <div class="frow">
+      <div class="fbadges"><span class="badge bt">Reportes / KPIs</span><span class="badge br">negativo</span></div>
+      <div class="ftext">Falta la métrica de rechazo de oferta: el cliente no puede saber si los candidatos rechazan la propuesta económica ni en qué etapa se pierde más talento.</div>
+    </div>
+
+    <div class="frow">
+      <div class="fbadges"><span class="badge bt">Boarding Room</span><span class="badge ba">neutro</span></div>
+      <div class="ftext">Lo vieron en demo pero aún no implementaron. Planean arrancarlo este trimestre para ingresos masivos. Solicitan material de configuración paso a paso.</div>
+    </div>
+  </div>
+
+  <!-- Temas -->
+  <div class="card">
+    <div class="card-head"><span class="cdot" style="background:var(--teal)"></span>TEMAS MÁS MENCIONADOS</div>
+
+    <div class="brow">
+      <div class="blabel">Pipeline centralizado</div>
+      <div class="btrack"><div class="bfill" style="width:100%;background:#4ECBA5"></div></div>
+      <div class="bcount">8</div>
+    </div>
+    <div class="brow">
+      <div class="blabel">Videoentrevistas con IA</div>
+      <div class="btrack"><div class="bfill" style="width:87%;background:#2DD4BF"></div></div>
+      <div class="bcount">7</div>
+    </div>
+    <div class="brow">
+      <div class="blabel">Hiring Bot (WhatsApp)</div>
+      <div class="btrack"><div class="bfill" style="width:75%;background:#FFB547"></div></div>
+      <div class="bcount">6</div>
+    </div>
+    <div class="brow">
+      <div class="blabel">Reportes y KPIs</div>
+      <div class="btrack"><div class="bfill" style="width:62%;background:#FF6B6B"></div></div>
+      <div class="bcount">5</div>
+    </div>
+    <div class="brow">
+      <div class="blabel">Selección colaborativa</div>
+      <div class="btrack"><div class="bfill" style="width:50%;background:#A78BFA"></div></div>
+      <div class="bcount">4</div>
+    </div>
+    <div class="brow">
+      <div class="blabel">Career Site</div>
+      <div class="btrack"><div class="bfill" style="width:37%;background:#4ECBA5"></div></div>
+      <div class="bcount">3</div>
+    </div>
+    <div class="brow">
+      <div class="blabel">Boarding Room</div>
+      <div class="btrack"><div class="bfill" style="width:25%;background:#2DD4BF"></div></div>
+      <div class="bcount">2</div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <div class="footer-brand"><em>Hiring</em> Room · Insights IA</div>
+    <div class="footer-time">Generado el 6 de mayo de 2026</div>
+  </div>
+
+</div>
+</body>
+</html>
